@@ -1,0 +1,130 @@
+<div class="modal fade" id="Modal_Editar_Libros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Editar Libros</h5>
+                <button type="button" (click)="resetForm(formEditarLibros)" 
+                     class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+          llama al evento SaveEditarLibros y pasara todos los campos del formulario (formEditarLibros) -->
+                <form 
+                        name="formEditarLibros" 
+                        #formEditarLibros="ngForm" 
+                        (ngSubmit)="onSaveEditarLibros(formEditarLibros)">
+                    <!--input para el id oculto-->
+                    <input 
+                        type="hidden" 
+                        name="ID_Libro"
+                        [(ngModel)]="controladorLibrosService.selectLibros.ID_Libro">
+                    <!--Agregamos los datos 1-->
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="Titulo_Libro"><b>Titulo del Libro</b></label>
+                          <input 
+                          type="text"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                          name="Titulo_Libro"
+                          placeholder="Ingrese el Título del Libros"
+                          [(ngModel)]="controladorLibrosService.selectLibros.Titulo_Libro"
+                          autofocus>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="Fecha_Edicion_Libro"><b>Fecha de Edición del Libro</b></label>
+                          <input 
+                          type="date"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                          name="Fecha_Edicion_Libro" 
+                          [(ngModel)]="controladorLibrosService.selectLibros.Fecha_Edicion_Libro">
+                        </div>
+                      </div>
+                          <!--Agregamos los datos2-->
+                    <div class="form-group">
+                        <label for="Descripcion" class="col-form-label"><b>Descripción Libro:</b></label>
+                        <!--Creamos el txtArea nombre con un id y un nombre-->
+                        <textarea 
+                            class="form-control input-sm text-black my-3" 
+                            style="width:100%;height:0%"
+                            name="Descripcion_Libro"
+                            [(ngModel)]="controladorLibrosService.selectLibros.Descripcion_Libro"
+                            placeholder="Ingrese la Descripcion del libro" 
+                            rows="3" 
+                            cols="40">
+                         </textarea>
+                    </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ID_Autor_Libro"><b>Nombre del Autor </b></label>
+                            <select 
+                                name="ID_Autor_Libro"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%"
+                                [(ngModel)]="controladorLibrosService.selectLibros.ID_Autor_Libro">
+                                <!--Mostramos los ID de los Autores-->
+            
+                                <option *ngFor="let Autores of listAutores" [value]="Autores.ID_Autor">
+                                    {{Autores.Nombre_Autor}} {{Autores.Apellidos_Autor}}
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label for="ID_Categoria_Libro"><b>Categoría del Libro</b></label>
+                            <select 
+                                name="ID_Categoria_Libro"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%"
+                                [(ngModel)]="controladorLibrosService.selectLibros.ID_Categoria_Libro">
+                                <option class="form-control input-sm  my-3 text-black" value="">Seleccione un
+                                    Categoria...</option>
+                                <!--Mostramos los ID de los Categorías-->
+            
+                                <option *ngFor="let Categorias of listCategorias" [value]="Categorias.ID_Categoria">
+                                    {{Categorias.Nombre_Categoria}}
+                                </option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="ID_Editorial_Libro"><b>Editorial del Libro</b></label>
+                        <select 
+                            name="ID_Editorial_Libro"
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%"
+                            [(ngModel)]="controladorLibrosService.selectLibros.ID_Editorial_Libro">
+                            <option class="form-control input-sm  my-3 text-black" value="">Seleccione un
+                                Editorial...</option>
+                            <!--Mostramos los ID de los Editoriales-->
+        
+                            <option *ngFor="let Editoriales of listEditoriales" [value]="Editoriales.ID_Editorial">
+                                {{Editoriales.Nombre_Editorial}}
+                            </option>
+                        </select>
+                      </div>
+                </div>
+                    
+                  
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            <b> Editar</b>
+                        </button>
+                        <button type="button" (click)="resetForm(formEditarLibros)"  class="btn btn-outline-danger btn-sm" #btnClose data-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i><b> Cerrar</b>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

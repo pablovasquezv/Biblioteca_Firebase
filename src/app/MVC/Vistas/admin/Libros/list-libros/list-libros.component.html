@@ -1,0 +1,88 @@
+<section class="row mt-5">
+    <div class="row">
+        <div class="col-md">
+            <h6 class="text-center"><b>Listado de Libros</b></h6>
+            <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+            <div class="table-responsive">
+                <button class="btn btn-primary float-right mb-3"
+                        data-toggle="modal"
+                        data-target="#ModalLibros">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i> 
+                        <b> Nuevo Libro</b>
+                </button>
+                 <!--Filtro Buscador-->
+                 <div class="form-group">
+                    <input 
+                    type="text"
+                    name="filtroLibros" 
+                    class="form-control" placeholder="Búsqueda del Título del libro..."
+                    [(ngModel)]="filtroLibros"
+                    >
+                </div>
+                <!-- Fin Filtro Buscador-->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"><b>#</b></th>
+                            <th scope="col"><b>Titulo Libro</b></th>
+                            <th scope="col"><b>Fecha Edicion</b></th>
+                            <th scope="col"><b>Descripción</b></th>
+                            <!--
+                            <th scope="col"><b>Autor</b></th>
+                            <th scope="col"><b>Categoría</b></th>
+                            <th scope="col"><b>Editorial</b></th>
+                            -->
+                            <th scope="col"><b>Botón</b></th>
+                            <th scope="col"><b>Botón</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pActual }  | filter: filterPost -->
+                    
+                        <tr *ngFor="let Libros of listLibros | filterLibros:filtroLibros | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{Libros.Titulo_Libro}}</td>
+                            <td>{{Libros.Fecha_Edicion_Libro}}</td>
+                            <td>{{Libros.Descripcion_Libro}}</td>
+                            <!--
+                            <td>{{Libros.ID_Autor_Libro }} </td>
+                            <td>{{Libros.ID_Categoria_Libro}}</td>
+                            <td>{{Libros.ID_Editorial_Libro}}</td>
+                            -->
+                            <td>
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onEdit(cliente) para editar
+                                         todos los campos routerLink="/cliente-list"-->
+                                <button 
+                                    class="btn btn-warning text-white" 
+                                    data-toggle="modal"
+                                    data-target="#Modal_Editar_Libros" 
+                                    (click)="onEdit(Libros)">
+                                    <i class="fa fa-edit"></i>
+                                    <b>Editar</b>
+                                </button>
+                            </td>
+                            <td>
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                                <button 
+                                    class="btn btn-danger text-white" 
+                                    (click)="onDelete(Libros.ID_Libro)">
+                                    <i class="fas fa-trash-alt"></i>
+                                    <b>Eliminar</b>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Agregamos la paginacion a la  tabla-->
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>
+<app-modal-libros></app-modal-libros>
+<app-modal-editar-libros></app-modal-editar-libros>

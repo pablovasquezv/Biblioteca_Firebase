@@ -1,0 +1,56 @@
+<section class="row mt-5" >
+        <div  aling="center" class="col-md">
+            <h6 class="text-center"><b>Lista de Categorías</b></h6>
+            <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+            <div class="table-responsive">
+                <button 
+                    class="btn btn-primary float-right mb-3" 
+                    data-toggle="modal" data-target="#ModalCategorias">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> 
+                    <b> Nueva Categoría</b>
+                </button>
+                <!--Filtro Buscador-->
+                <div class="form-group">
+                    <input type="text"
+                    name="filtroCategorias" 
+                    class="form-control" placeholder="Búsqueda del Nombre de Categoria..."
+                    [(ngModel)]="filtroCategorias"
+                    >
+                </div>
+                <!-- Fin Filtro Buscador-->
+                <table class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center"><b>#</b></th>
+                            <th scope="col" class="text-center"><b>Nombre</b></th>
+                            <th scope="col" class="text-center"><b>Descripción</b></th>
+                            <th scope="col" class="text-center"><b>Botón</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pActual }  | filter: filterPost -->
+
+                        <tr *ngFor="let Categorias of listCategorias | filterCategorias:filtroCategorias | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i">
+                            <th scope="row"class="text-center">{{i+1}}</th>
+                            <td class="text-center">{{Categorias.Nombre_Categoria}}</td>
+                            <td class="text-center">{{Categorias.Descripcion_Categoria}}</td>
+                            <td class="text-center">
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                                <button class="btn btn-danger text-white" (click)="onDelete(Categorias.ID_Categoria)">
+                                    <i class="fa fa-trash-alt"></i>
+                                    <b>Eliminar</b></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Agregamos la paginacion a la  tabla-->
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+            </div>
+    </div>
+</section>
+<app-modal-categorias></app-modal-categorias>
+

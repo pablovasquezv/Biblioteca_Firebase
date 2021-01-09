@@ -1,0 +1,168 @@
+
+<div class="modal fade" id="ModalBook" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{!this.controladorDataApiService.selectBook.id ? 'Nuevo Libro' : 'Actualizar Libro'}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+        llama al evento SaveBook y pasara todos los campos del formulario (formBook) -->
+        <form  
+           [formGroup]="formBook"
+           (ngSubmit)="onSaveBook()">
+          <!--input para el id oculto-->
+          <input type="hidden" formControlformControlName="id" >
+          <!--Input para que solo editar el usuario que crea un libro-->
+          <!--<input type="text" formControlName="userUid" [value]="userUid">-->
+          <div class="form-group">
+            <label for="titulo" class="col-form-label"><b>Título:</b></label>
+            <input 
+            type="text" 
+            formControlName="Titulo"
+            class="form-control input-sm text-black" 
+            style="width:100%;height:1%"
+            placeholder="Título">
+          </div>
+          <!--Inicio Div de Validación-->
+          <div class="alert-danger" *ngIf="Titulo.invalid && (Titulo.dirty || Titulo.touched) ">
+            <div class="container-error-message"*ngIf="Titulo.errors.required">El Titulo es requerido!</div>
+            <div class="container-error-message" *ngIf="Titulo.errors.minlength"> El Nombre del Título debe tener como minimo 5 Carácteres </div>
+            <div class="container-error-message" *ngIf="Titulo.errors.maxlength"> El Nombre del Título debe tener como máximo 100 Carácteres </div>
+          </div>
+          <!--Fin Div Validación-->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="idioma"><b>Idioma</b></label>
+              <select
+              formControlName="Idioma" 
+              class="form-control input-sm text-black" 
+              style="width:100%;height:50%" >
+                <option value="ingles"><b>Inglés</b></option>
+                <option value="español"><b>Español</b></option>
+              </select>
+            </div>
+             <!--Inicio Div de Validación-->
+          <div class="alert-danger" *ngIf="Idioma.invalid && (Idioma.dirty || Idioma.touched) ">
+            <div class="container-error-message"*ngIf="Idioma.errors.required">El Idioma es requerido!</div>
+            <div class="container-error-message" *ngIf="Idioma.errors.minlength"> El Nombre del Título debe tener como minimo 5 Carácteres </div>
+            <div class="container-error-message" *ngIf="Idioma.errors.maxlength"> El Nombre del Título debe tener como minimo 10 Carácteres </div>
+          </div>
+          <!--Fin Div de Validación-->
+            <div class="form-group col-md-6">
+              <label for="precio">Precio</label>
+              <input 
+              type="text"
+              class="form-control input-sm text-black" 
+              style="width:100%;height:50%" 
+              formControlName="Precio" 
+              placeholder="0,00$">
+            </div>
+          </div>
+           <!--Inicio Div de Validación-->
+           <div class="alert-danger" *ngIf="Precio.invalid && (Precio.dirty || Precio.touched) ">
+            <div class="container-error-message"*ngIf="Precio.errors.required">El Precio es requerido!</div>
+            <div class="container-error-message" *ngIf="Precio.errors.minlength"> El Nombre del Título debe tener como minimo 5 Numeros </div>
+            <div class="container-error-message" *ngIf="Precio.errors.maxlength"> El Nombre del Título debe tener como minimo 10 Carácteres </div>
+          </div>
+          <!--Fin Div de Validación-->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="autor"><b>Autor</b></label>
+              <input  
+              type="text" 
+              formControlName="Autor" 
+              class="form-control input-sm text-black" 
+              style="width:100%;height:50%" 
+              placeholder="Autor">
+            </div>
+            <!--Inicio Div de Validación-->
+           <div class="alert-danger" *ngIf="Autor.invalid && (Autor.dirty || Autor.touched) ">
+            <div class="container-error-message"*ngIf="Autor.errors.required">El Autor es requerido!</div>
+            <div class="container-error-message" *ngIf="Autor.errors.minlength"> El Nombre del Título debe tener como minimo 5 Numeros </div>
+            <div class="container-error-message" *ngIf="Autor.errors.maxlength"> El Nombre del Título debe tener como minimo 10 Carácteres </div>
+          </div>
+          <!--Fin Div de Validación-->
+            <div class="form-group col-md-6">
+              <label for="oferta"><b>Oferta</b></label>
+              <select 
+              formControlName="Oferta" 
+              class="form-control input-sm text-black" 
+              style="width:100%;height:50%" >
+                <option value="1"><b>Sí</b></option>
+                <option value="0"><b>No</b></option>
+              </select>
+            </div>
+          </div>
+          <!--Inicio Div de Validación-->
+          <div class="alert-danger" *ngIf="Oferta.invalid && (Oferta.dirty || Oferta.touched) ">
+            <div class="container-error-message"*ngIf="Oferta.errors.required">El Oferta es requerido!</div>
+            <div class="container-error-message" *ngIf="Oferta.errors.minlength"> El Nombre del Título debe tener como minimo 5 Numeros </div>
+            <div class="container-error-message" *ngIf="Oferta.errors.maxlength"> El Nombre del Título debe tener como minimo 10 Carácteres </div>
+          </div>
+          <!--Fin Div de Validación-->
+          <div class="form-row">
+            <div class="from-group col-md-6">
+              <label for="portada"><b>Portada</b></label>
+              <input 
+              type="text" 
+              formControlName="Portada" 
+              class="form-control input-sm text-black" 
+              style="width:100%;height:50%"
+              placeholder="Portada">
+            </div>
+            <!--Inicio Div de Validación-->
+          <div class="alert-danger" *ngIf="Portada.invalid && (Portada.dirty || Portada.touched) ">
+            <div class="container-error-message"*ngIf="Portada.errors.required">El Portada es requerido!</div>
+            <div class="container-error-message" *ngIf="Portada.errors.minlength"> El Nombre del Título debe tener como minimo 5 Numeros </div>
+            <div class="container-error-message" *ngIf="Portada.errors.maxlength"> El Nombre del Título debe tener como minimo 10 Carácteres </div>
+          </div>
+          <!--Fin Div de Validación-->
+            <div class="from-group col-md-6">
+              <label for="link_amazon"><b>Link Amazon</b></label>
+              <input 
+              type="text"
+              class="form-control input-sm text-black" 
+              style="width:100%;height:50%" 
+              formControlName="Link_Amazon" 
+              placeholder="Link Amazon" >
+            </div>
+          </div>
+          <!--Inicio Div de Validación-->
+          <div class="alert-danger" *ngIf="Link_Amazon.invalid && (Link_Amazon.dirty || Link_Amazon.touched) ">
+            <div class="container-error-message"*ngIf="Link_Amazon.errors.required">El Link_Amazon es requerido!</div>
+            <div class="container-error-message" *ngIf="Link_Amazon.errors.minlength"> El Nombre del Título debe tener como minimo 5 Numeros </div>
+            <div class="container-error-message" *ngIf="Link_Amazon.errors.maxlength"> El Nombre del Título debe tener como minimo 10 Carácteres </div>
+          </div>
+          <!--Fin Div de Validación-->
+          <div class="form-group">
+            <label for="descripcion" class="col-form-label"><b>Descripcion</b>:</label>
+            <textarea 
+                class="form-control input-sm text-black" 
+                style="width:100%;height:50%"
+                formControlName="Descripcion"
+                placeholder="Ingrese la Descripción de Libro">
+            </textarea>
+          </div>
+          <!--Inicio Div de Validación-->
+          <div class="alert-danger" *ngIf="Descripcion.invalid && (Descripcion.dirty || Descripcion.touched) ">
+            <div class="container-error-message"*ngIf="Descripcion.errors.required">El Descripcion es requerido!</div>
+            <div class="container-error-message" *ngIf="Descripcion.errors.minlength"> El Nombre del Título debe tener como minimo 5 Numeros </div>
+            <div class="container-error-message" *ngIf="Descripcion.errors.maxlength"> El Nombre del Título debe tener como minimo 10 Carácteres </div>
+          </div>
+          <!--Fin Div de Validación-->
+          <div class="modal-footer">
+            <!--Desabilitamos el boton si el formulario no esta validado-->
+            <button type="submit" class="btn btn-primary" [disabled]="!formBook.valid"><b>Guardar</b></button>
+            <button type="button" class="btn btn-secondary"  #btnClose data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

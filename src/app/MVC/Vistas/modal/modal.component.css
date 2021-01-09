@@ -1,0 +1,17 @@
+/*Color mensaje validación*/
+.alert-danger{
+    color: white;
+    background:rgb(255, 0, 0);
+    border-color:orange;
+    margin-bottom: 3%;
+}
+
+/**/
+.container-error-message {
+    padding: 3%;
+}
+
+/*Propiedad que desabilita el botón guardar*/
+.btn-primary:hover:not([disabled]){
+    background:rgba(109, 109, 110, 0.28);
+}

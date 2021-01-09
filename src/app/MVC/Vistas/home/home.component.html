@@ -1,0 +1,259 @@
+<!--Creamos el inicio de la aplicacion agregamos separiacio con la class="mt-5" -->
+<section id="books" class="mt-5">
+  <!--Margenes-->
+  <div class="responsive mt-5">
+    <!--Car-->
+    <div class="container my-3 ">
+      <!--Agregamos las  con la  clase row Columnas-->
+      <div class="row">
+        <!--Diseñar Carrucel de imagenes  con la cantidad de columnas que tiene-->
+        <div class="col-sm-8">
+          <!--otorgamos el nombre al carrucel id="slide1"-->
+          <!--class="carousel slide carousel-fade" es la propiedad con la que se mostraran las imagenes-->
+          <!--data-ride="carousel" es para el tipo carrucel-->
+          <div id="slide1" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+              <!-- Indicatores de Carrusel -->
+              <ol class="carousel-indicators">
+                <li data-target="#slide1" data-slide-to="0" class="active"></li>
+                <li data-target="#slide1" data-slide-to="1"></li>
+                <li data-target="#slide1" data-slide-to="2"></li>
+              </ol>
+              <!--Esta sera la primera imagen que se muestre y utilizamos la class="carousel-item active"-->
+              <div class="carousel-item active" role="listbox">
+                <!--Agregamos la ruta de las imagenes class="img-thumbnail" para que se mueste un borde en las imagenes
+                 alt="Third slide" para que se muestre 5 segundo la imagen al cargar la pagina y luego avance a la siguente-->
+                <img src="../../../../assets/imagenes/luisdurand1.jpg" class="img-thumbnail" alt="Third slide"
+                  data-toggle="tooltip" data-placemet="top" width="30%" height="50%"
+                  title="Complejo Educacional Luis Durand">
+              </div>
+              <!-- class="carousel-item , alt="Second slide" para el cambio de imagen-->
+              <div class="carousel-item">
+                <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+                <img src="../../../../assets/imagenes/luisdurand2.jpg" class="img-thumbnail" alt="Second slide"
+                  data-toggle="tooltip" data-placemet="top" width="30%" height="50%"
+                  title="Complejo Educacional Luis Durand">
+              </div>
+              <!-- class="carousel-item , alt="Second slide" para el cambio de imagen-->
+              <div class="carousel-item">
+                <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+                <img src="../../../../assets/imagenes/luisdurand3.jpg" 
+                class="img-thumbnail" alt="Second slide"
+                  data-toggle="tooltip" data-placemet="top" width="30%" height="50%"
+                  title="Complejo Educacional Luis Durand">
+              </div>
+              <!-- class="carousel-item , alt="Second slide" para el cambio de imagen
+        data-toggle="tooltip" es para llamar la funcion
+        data-placemet="top" posicion del mensaje -->
+
+
+              <a class="carousel-control-prev" href="#slide1" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+              </a>
+              <!--CreamoS los botones para avanzara y retroceder las imagen 
+           class="carousel-control-prev" es para el control del las imagenes con un icono 
+           href="#slide1" para el nombre del carrusel con un # y el nombre hacemos la referencia
+           role="button" especificamos que es un boton
+           data-slide="next" muestra la imagen del boton 
+          aria-hidden="true" para que se muestre el boton dentro del carrucel-->
+              <a class="carousel-control-next" href="#slide1" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!---Agremamos un area de texto dentro la costado derecho con cuatro columnas con id para el color del contorno-->
+        <div class="col-sm-4" id="texto">
+          <div class="well" id="principal">
+            <div class="responsive">
+              <p class=" responsive lead text-center"> <br>
+                El Complejo Educacional Luis Durand busca formar personas capaces de
+                comprender y transformar la realidad; de enfrentar cambios y desafíos,
+                tanto naturales como sociales; con autonomía<br> de juicio y que encarnen
+                los valores propios del bien común, tales como<br> la honestidad, la tolerancia,
+                la aceptación de la diversidad, la solidaridad, la justicia, la conciencia
+                ciudadana y el respeto por el medio ambiente y las personas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!--Agregamos la Tabla-->
+
+
+  <div class="container text-center">
+    <h3>Actividades Escolares</h3>
+    <br>
+    <div class="row">
+      <div class="col-sm-4">
+        <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+        <img src="../../../../assets/imagenes/luisdurand5.jpg" class="img-thumbnail img-responsive" 
+          style="width:100%" alt="Image">
+        <p class="lead"><b>Día de la Mujer 2019</b></p>
+      </div>
+      <div class="col-sm-4">
+        <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+        <img src="../../../../assets/imagenes/luisdurand6.jpg" 
+        class="img-thumbnail img-responsive " 
+          style="width:100%" alt="Image">
+          <p class="lead"><b>Día de la Mujer 2019</b></p>
+        <p class="lead"></p>
+      </div>
+      <div class="col-sm-4">
+        <div class="well" id="principal">
+          <p class="lead">
+            El Complejo Educacional Luis Durand busca favorecer al máximo las posibilidades
+            de cada estudiante, respetando los particulares ritmos
+            y modos de aprendizaje y promoviendo la superación permanente
+            de sus miembros respecto de sí mismos.
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!--Galeria-->
+    <div class="container text-center" id="Imagenes" class="mt-5">
+      <h3 class="mt-3">Desfiles Escolares</h3>
+      <br>
+      <div class="row">
+        <div class="col-sm-2">
+          <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+          <img src="../../../../assets/imagenes/luisdurand4.jpg" 
+          class="img-thumbnail img-responsive" 
+            style="width:100%" alt="Image" title="18 Septiembre">
+          <p class="lead"><b>18 de Septiembre</b></p>
+        </div>
+        <div class="col-sm-2">
+          <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+          <img src="../../../../assets/imagenes/luisdurand7.jpg" class="img-thumbnail img-responsive" 
+            style="width:100%" alt="Image" title="21 Mayo">
+          <p class="lead"><b>12 de Mayo</b></p>
+        </div>
+        <div class="col-sm-2">
+          <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+          <img src="../../../../assets/imagenes/luisdurand8.jpg" class="img-thumbnail img-responsive" 
+            style="width:100%" alt="Image" title="Licenciatura 2018">
+          <p class="lead"><b>Licenciatura 2018</b></p>
+        </div>
+        <div class="col-sm-2">
+          <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+          <img src="../../../../assets/imagenes/luisdurand9.jpg" class="img-thumbnail img-responsive" 
+            style="width:100%" alt="Image" title="Aniversario Traiguen 2018">
+          <p class="lead"><b>Aniversario Traiguen 2018</b></p>
+        </div>
+        <div class="col-sm-2">
+          <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+          <img src="../../../../assets/imagenes/luisdurand10.jpg" class="img-thumbnail img-responsive" 
+            style="width:200% " alt="Image" title="Aniversario Traiguen 2019 ">
+          <p class="lead"><b>Aniversario Traiguen 2019</b></p>
+        </div>
+        <div class="col-sm-2">
+          <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+          <img src="../../../../assets/imagenes/luisdurand11.jpg" class="img-thumbnail img-responsive" 
+            style="width:130%" alt="Image" title="Aniversario Traiguen 2019">
+          <p class="lead"><b>Licenciatura 2019</b></p>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div align="center" class="mt-5">
+      <!--contenedor de tabla y Seleccion de archivo-->
+      <div class="container table-responsive">
+        <div class="row">
+          <div class="col">
+            <h4>Horario de Clases</h4>
+            <table class="table table-hover" style="width:100%">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center"><b>Jornadas</b></th>
+                  <th scope="col" class="text-center"> Lunes</th>
+                  <th scope="col" class="text-center"> Martes</th>
+                  <th scope="col" class="text-center"> Miercoles</th>
+                  <th scope="col" class="text-center"> Jueves</th>
+                  <th scope="col" class="text-center"> Viernes</th>
+                </tr>
+
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="col" class="text-center"><b>Mañana</b></th>
+                  <td class="text-center">08:20-13:05</td>
+                  <td class="text-center">08:20-13:05</td>
+                  <td class="text-center">08:20-13:05</td>
+                  <td class="text-center">08:20-13:05</td>
+                  <td class="text-center">08:20-13:05</td>
+                </tr>
+                <tr>
+                  <th scope="col" class="text-center"><b>Tarde</b></th>
+                  <td class="text-center">14:40-17:50</td>
+                  <td class="text-center">14:40-17:50</td>
+                  <td class="text-center">14:40-16:15</td>
+                  <td class="text-center">14:40-17:50</td>
+                  <td class="text-center">14:40-17:50</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!--informacion-->
+
+  <div class="container" align="center" class="mt-5">
+    <div class="row">
+      <div class="col-sm">
+        <div align="left">
+          <b>Convenios</b>
+          <br>
+          <a href="#">Tiendas</a>
+          <br>
+          <a href="#">Pedidos</a>
+          <br>
+          <a href="#">Servicio tecnico</a>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div align="left">
+          <b>Informacion</b>
+          <br>
+          <a>Preguntas frecuentes</a>
+          <br>
+          <a>Terminos y condiciones</a>
+          <br>
+          <a>Sobre nosotros</a>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div align="left">
+          <b>Contactos</b>
+          <br>
+          <a>Nuestro WhatsApp</a>
+          <br>
+          <a>Buscanos en facebook</a>
+          <br>
+          <a>ComplejoLuisDurand@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!---Pie de pagina-->
+  <!--Creamos el pie de pagina donde va la informaci�n principal-->
+  <!---Pie de pagina-->
+  <div class="row" class="mt-5">
+    <div class="col-sm-12 ">
+      <p align="center">Derechos Reservados 2019-2020 &copy; </p>
+    </div>
+  </div>
+</section>

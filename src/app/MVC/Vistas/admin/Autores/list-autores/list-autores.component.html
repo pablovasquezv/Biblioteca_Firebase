@@ -1,0 +1,61 @@
+<section class="row mt-5" >
+       <!--Div de la tabla -->
+        <div  class="col-sm-12 center-block ">
+            <h6 class="text-center"><b>Lista de Autores</b></h6>
+            <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+            <div class="table-responsive">
+                <button 
+                    class="btn btn-primary float-right mb-3" 
+                    data-toggle="modal" data-target="#ModalAutores">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> 
+                    <b> Nuevo Autor</b>
+                </button>
+                <!--Filtro Buscador-->
+                        <div class="form-group">
+                            <input type="text"
+                            name="filtroAutor" 
+                            class="form-control" placeholder="Búsqueda del Nombre del Autor"
+                            [(ngModel)]="filtroAutor"
+                            >
+                        </div>
+                <!-- Fin Filtro Buscador-->
+                <table class="table table-hover"  style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col"><b>#</b></th>
+                            <th scope="col"><b>Nombre</b></th>
+                            <th scope="col"><b>Apellidos</b></th>
+                            <th scope="col"><b>País</b></th>
+                            <th scope="col"><b>Botón</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pActual }  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i
+                    
+                    -->
+
+                        <tr *ngFor="let Autores of listAutores | filterAutor:filtroAutor | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i  ">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{Autores.Nombre_Autor}}</td>
+                            <td>{{Autores.Apellidos_Autor}}</td>
+                            <td>{{Autores.Pais_Autor}}</td>
+                            <td>
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                                <button class="btn btn-danger text-white" (click)="onDelete(Autores.ID_Autor)">
+                                    <i class="fa fa-trash-alt"></i>
+                                    <b>Eliminar</b></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Agregamos la paginacion a la  tabla-->
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+            </div>
+    </div>
+</section>
+<app-modal-autores></app-modal-autores>

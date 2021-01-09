@@ -1,0 +1,94 @@
+<section class="row mt-5">
+    <div class="row">
+        <div aling="center" class="col-md  mt-5" >
+            <h6 class="text-center"><b>Lista de Usuarios</b></h6>
+            <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+            <div class="table-responsive">
+                <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#ModalUsuarios"
+                    title="Botón Nuevo Usuario">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <b> Nuevo Usuario</b>
+                </button>
+
+                <!--Filtro Buscador-->
+                <div class="form-group">
+                    <input type="text" name="filtroUsuarios" class="form-control" placeholder="Búsqueda Rut Usuarios..."
+                        [(ngModel)]="filtroUsuarios">
+                </div>
+                <!-- Fin Filtro Buscador-->
+                <table class="table table-hover" style="width:30%">
+                    <thead>
+                        <tr>
+                            <th scope="col"><b>#</b></th>
+                            <th scope="col" class="text-center"><b>Rut </b></th>
+                            <th scope="col" class="text-center"><b>Nombres</b></th>
+                            <th scope="col" class="text-center"><b>Paterno</b></th>
+                            <!--+
+                            <th scope="col" class="text-center"><b>Materno</b></th>
+                            <th scope="col" class="text-center"><b>Fecha Nacimiento</b></th>
+                            -->
+                            <th scope="col" class="text-center"><b>Sexo</b></th>
+                            <th scope="col" class="text-center"><b>Direccion</b></th>
+                            <th scope="col" class="text-center"><b>Email</b></th>
+                            <th scope="col" class="text-center"><b>Teléfono</b></th>
+                            <th scope="col" class="text-center"><b>Botón</b></th>
+                            <th scope="col" class="text-center"><b>Botón</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pActual }  | filter: filterPost -->
+
+                        <tr
+                            *ngFor="let Usuarios of listUsuarios | filterUsuarios:filtroUsuarios | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i">
+                            <th scope="row">{{i+1}}</th>
+                            <td class="text-center">{{Usuarios.Rut_Usuario}}</td>
+                            <td class="text-center">{{Usuarios.Nombres_Usuario}}</td>
+                            <td class="text-center">{{Usuarios.Apellido_Paterno_Usuario}}</td>
+                            <!--
+                            <td class="text-center">{{Usuarios.Apellido_Materno_Usuario}}</td>
+                            <td class="text-center">{{Usuarios.Fecha_Nacimiento_Usuario}}</td>
+                            -->
+                            <td class="text-center">{{Usuarios.Sexo_Usuario == 1?'Masculino' : 'Femenino'}}</td>
+                            <td class="text-center">{{Usuarios.Direccion_Usuario}}</td>
+                            <td class="text-center">{{Usuarios.Email_Usuario}}</td>
+                            <td class="text-center">{{Usuarios.Telefono_Usuario}}</td>
+                            <td>
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onEdit(cliente) para editar
+                                         todos los campos routerLink="/cliente-list"-->
+                                <button class="btn btn-warning text-white" data-toggle="modal"
+                                    data-target="#Modal_Editar_Usuarios" title="Botón Editar"
+                                    (click)="onEdit(Usuarios)">
+                                    <!--
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                    -->
+                                    <b>Editar</b>
+                                </button>
+                            </td>
+                            <td>
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                                <button class="btn btn-danger text-white" 
+                                     title="Botón Eliminar"
+                                    (click)="onDelete(Usuarios.ID_Usuario)">
+                                    <!--
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                    -->
+                                    <b> Eliminar</b>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Agregamos la paginacion a la  tabla-->
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Agregamos los modals-->
+<app-modal-ingreso-usuarios></app-modal-ingreso-usuarios>
+<app-modal-editar-usuarios></app-modal-editar-usuarios>

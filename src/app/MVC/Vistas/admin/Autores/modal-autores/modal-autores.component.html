@@ -1,0 +1,96 @@
+<div class="modal fade" id="ModalAutores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Nuevo Autor</h5>
+        <button type="button" class="close btn btn-danger" (click)="onReserForm(formularioIngresoAutores)"
+          data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+          llama al evento SavePais y pasara todos los campos del formulario (formAutores) -->
+        <form [formGroup]="formularioIngresoAutores" (ngSubmit)="onSaveAutores()">
+          <!--input para el id oculto-->
+          <input type="hidden" formControlName="ID_Autor">
+          <div class="form-group">
+            <label for="Nombre Autor" class="col-form-label"><b>Nombre Autor</b></label>
+            <input type="text" class="form-control input-sm text-black" style="width:100%;height:1%"
+              formControlName="Nombre_Autor" placeholder="Ingrese el Nombre del Autor">
+            <!--Inicio Div de Validación-->
+            <div class="alert-danger" *ngIf="Nombre_Autor.invalid && (Nombre_Autor.dirty || Nombre_Autor.touched) ">
+              <div class="container-error-message" *ngIf="Nombre_Autor.errors.required" class="lead">El Nombre del Autor
+                requerido!
+              </div>
+              <div class="container-error-message" *ngIf="Nombre_Autor.errors.minlength" class="lead"> El Nombre del
+                Autor debe tener como minimo 4
+                Carácteres </div>
+              <div class="container-error-message" *ngIf="Nombre_Autor.errors.maxlength" class="lead"> El Nombre del
+                Autor debe tener como máximo 60
+                Carácteres </div>
+            </div>
+            <!--Fin Div Validación-->
+          </div>
+
+          <div class="form-group">
+            <label for="Pais" class="col-form-label"><b>Apellidos Autor:</b></label>
+            <input type="text" class="form-control input-sm text-black" style="width:100%;height:1%"
+              formControlName="Apellidos_Autor" placeholder="Ingrese los Apellidos del Autor">
+            <!--Inicio Div de Validación-->
+            <div class="alert-danger" *ngIf="Pais_Autor.invalid && (Pais_Autor.dirty || Pais_Autor.touched) ">
+              <div class="container-error-message" *ngIf="Pais_Autor.errors.required" class="lead">El País del Autor es
+                requerido!
+              </div>
+            </div>
+            <!--Fin Div Validación-->
+          </div>
+
+          <!--Agregamos los datos3-->
+          <div class="form-group">
+            <label for="Pais" class="col-form-label"><b>Selección de País</b></label>
+            <select class="form-control input-sm text-black" style="width:100%;height:1%" formControlName="Pais_Autor">
+              <!--Mostramos los ID de los sPaises-->
+              <option *ngFor="let Paises of listPaises" [value]="Paises.Nombre_Pais">
+                {{Paises.Nombre_Pais}}
+              </option>
+            </select>
+          </div>
+          <!--Inicio Div de Validación-->
+          <div class="alert-danger"
+            *ngIf="Apellidos_Autor.invalid && (Apellidos_Autor.dirty || Apellidos_Autor.touched) ">
+            <div class="container-error-message" *ngIf="Apellidos_Autor.errors.required" class="lead">Los Apellidos del
+              Autor son requeridos!
+            </div>
+            <div class="container-error-message" *ngIf="Apellidos_Autor.errors.minlength" class="lead"> Los Apellidos
+              del Autor debe tener como minimo 4
+              Carácteres </div>
+            <div class="container-error-message" *ngIf="Apellidos_Autor.errors.maxlength" class="lead"> Los Apellidos
+              del Autor debe tener como máximo 60
+              Carácteres </div>
+          </div>
+          <!--Fin Div Validación-->
+          <!--Inicio Div Botones-->
+          <div class="modal-footer">
+            <!--Desabilitamos el boton si el formulario con el método
+                      [disabled]="!formularioIngresoAutores.valid" no esta validadoformularioIngresoAutores-->
+            <button title="Botón Guardar" type="submit" [disabled]="!formularioIngresoAutores.valid"
+              class="btn btn-outline-primary btn-sm">
+              <i class="fa fa-save" aria-hidden="true"></i>
+              <b> Guardar</b>
+            </button>
+
+            <!--(click)="onReserForm(formularioIngresoAutores) limpaimos el formulario al cerrarlo-->
+            <button type="button" title="Botón Cerrar" (click)="onReserForm(formularioIngresoAutores)"
+              class="btn btn-outline-danger btn-sm" #btnClose data-dismiss="modal">
+              <i class="fa fa-times-circle" aria-hidden="true"></i><b> Cerrar</b>
+            </button>
+          </div>
+          <!--Fin Div Botones-->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

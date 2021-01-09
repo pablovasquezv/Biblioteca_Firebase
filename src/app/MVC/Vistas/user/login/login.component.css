@@ -1,0 +1,22 @@
+.form-control.login-user {
+    border: 0 solid #fff !important;
+  }
+  /*Creamos los Estilos para los botones*/
+  .btn-social{
+   position: relative;
+   text-align: center;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   color: #fff;
+   border-color:rgba(0,0,0,0.2);
+  }
+  /*Color para el boton*/
+  .btn-facebook{
+    background-color: #3b5998;
+    
+  }
+  /*Color para el boton*/
+  .btn-google{
+    background-color: #dd4b38;
+  }

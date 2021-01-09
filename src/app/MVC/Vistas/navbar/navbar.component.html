@@ -1,0 +1,140 @@
+<!--Inicio del nav-bar
+class="navbar navbar-expand-md navbar-dark fixed-top bg-primary"
+navbar navbar-expand-lg navbar-light 
+-->
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+  <div class="col-sm-1">
+   <!--Cargamos la ruta de las imagenes de la carpeta asset de Angular-->
+   <img src="../../../../assets/imagenes/logoLuisDurandD.jpg"  
+   class="img-fluid img-thumbnail" alt="Responsive image"
+   title="Logo Bilblioteca LuisDurandD">
+  </div>
+ 
+  <!--Agregamos el nombre de la aplicacion para llamarla de ts del navbar-->
+  <a class="navbar-brand" title="Nombre Bilblioteca"routerLink="/"><b>  {{app_name}}</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  <div class="collapse navbar-collapse" id="mainNavbar">
+    <ul class="navbar-nav mr-auto">
+      <!--Creamos la verificacion de si el usurio esta registrado podra ver el 
+          el contenido con la propiedad: *ngIf="isLogged"
+          sino no mostrara nada -->
+      <li class="nav-item " *ngIf="isLogged" title="Botón Home" >
+        <a class="nav-link" routerLink="/Home">
+          <i class="fa fa-home" title="Botón Home"  aria-hidden="true"></i>
+          <b> Inicio</b>
+        </a>
+      </li>
+     <!--lOGGED: {{isLogged}}--> 
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <!--Inicio un Boton para Prestamos y Devoluciones-->
+      <li class="nav-item" *ngIf="isLogged">
+        <!--Url de la carpeta del formulario-->
+        <a class="nav-link" routerLink="Prestamos">
+          <i class="fa fa-book" title="Botón Préstamos y Devoluciones"aria-hidden="true"></i><b> Préstamos y Devoluciones</b>
+        </a>
+      </li>
+      <!--Fin Botón Prestamos y Devoluciones-->
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <!--Creamos la verificacion de si el usurio esta registrado podra ver el 
+          el contenido con la propiedad: *ngIf="isLogged"
+          sino no mostrara nada -->
+      <li class="nav-item" *ngIf="!isLogged" hidden="true">
+        <a class="nav-link" routerLink="/user/registros">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          <b> Registro</b>
+        </a>
+      </li> 
+      <!--Creamos la verificacion de si el usuario esta registrado podra ver el 
+          el contenido con la propiedad: *ngIf="isLogged"
+          sino no mostrara nada -->
+      <!--Agregamos un botón desplegable con los matenedores-->
+      <li class="nav-item dropdown" *ngIf="isLogged">
+        <!--Verificación con *ngIf="isAdmin == true; else noAdmin" del usuario si es Admin se 
+             muestra el boton de lo contraro se desabilita-->
+        <a  
+         *ngIf="isAdmin == true; else noAdmin" 
+          class="nav-link dropdown-toggle"
+          id="navbarDropdown" 
+          role="button" 
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          title="Botón Mantenedores">
+          <i class="fa fa-cogs" aria-hidden="true">
+
+          </i><b> Mantenedores</b>
+        </a>
+        <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
+          <!--Agregamos la ruta de navegacion a....-->
+          <a class="dropdown-item" routerLink="/Autores"><b>Ingreso de Autores</b></a>
+          <a class="dropdown-item" routerLink="/Categorias"><b>Ingreso de Categorias</b></a>
+          <a class="dropdown-item" routerLink="/Editoriales"><b>Ingreso de Editoriales</b></a>
+          <a class="dropdown-item" routerLink="/Libros"><b>Ingreso de Libros</b></a>
+          <a class="dropdown-item" routerLink="/Paises"><b>Ingreso de Paises</b></a>
+          <a class="dropdown-item" routerLink="Prestamos"><b>Préstamos y Devoluciones</b></a>
+          <a class="dropdown-item" routerLink="/Usuarios"><b>Ingreso de Usuarios</b></a>
+        </div>
+      </li>
+      <!--Fin del Botón Mantenedores-->
+       <!--Template para ocultar el botón al no ser admin-->
+       <ng-template #noAdmin>
+        <li class="nav-item dropdown"
+            *ngIf="isLogged" hidden="true">
+          <a 
+            class="nav-link dropdown-toggle" 
+            id="navbarDropdown"role="button" 
+            data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" title="Botón Mantenedores">
+            <i class="fa fa-cogs" aria-hidden="true">
+  
+            </i><b> Mantenedores</b>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" hidden="true">
+            <!--Agregamos la ruta de navegacion a....-->
+            <a class="dropdown-item" routerLink="/Autores"><b>Ingreso de Autores</b></a>
+            <a class="dropdown-item" routerLink="/Categorias"><b>Ingreso de Categorias</b></a>
+            <a class="dropdown-item" routerLink="/Editoriales"><b>Ingreso de Editoriales</b></a>
+            <a class="dropdown-item" routerLink="/Libros"><b>Ingreso de Libros</b></a>
+            <a class="dropdown-item" routerLink="/Paises"><b>Ingreso de Paises</b></a>
+            <a class="dropdown-item" routerLink="Prestamos"><b>Préstamos y Devoluciones</b></a>
+            <a class="dropdown-item" routerLink="/Usuarios"><b>Ingreso de Usuarios</b></a>
+          </div>
+        </li>
+    </ng-template>
+      <!--Creamos la verificacion de si el usurio esta registrado podra ver el 
+          el contenido con la propiedad: *ngIf="isLogged"
+          sino no mostrara nada -->
+      <li class="nav-item" *ngIf="isLogged" hidden="true">
+        <a class="nav-link" routerLink="/admin/list-book">List Books</a>
+      </li>
+      <!--Creamos la verificacion de si el usurio esta registrado podra ver el 
+          el contenido con la propiedad: *ngIf="isLogged"
+          sino no mostrara nada -->
+      <li class="nav-item" *ngIf="!isLogged" title="Botón Incio de Sesión">
+        <a class="nav-link" routerLink="/user/login">
+          <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+          <b> Ingresar</b>
+        </a>
+      </li>
+      <!--Creamos la verificacion de si el usurio esta registrado podra ver el 
+            el contenido con la propiedad: *ngIf="isLogged"
+            sino no mostrara nada -->
+      <li class="nav-item" *ngIf="isLogged" title="Botón Salir">
+        <a href="#" class="nav-link" (click)="onLogout()">
+        
+          <i class="fa fa-times-circle" aria-hidden="true"></i>
+          <b> Salir</b>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--Fin del nav-bar-->

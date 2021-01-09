@@ -1,0 +1,105 @@
+<div class="modal fade" id="Modal_Editar_Prestamos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Editar Préstamo</h5>
+                <button type="button" (click)="resetForm(formEditarPrestamos)" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+          llama al evento SaveEditarPrestamos y pasara todos los campos del formulario (formEditarPrestamos) -->
+                <form 
+                        name="formEditarPrestamos" 
+                        #formEditarPrestamos="ngForm" 
+                        (ngSubmit)="onSaveEditarPrestamos(formEditarPrestamos)">
+                    <!--input para el id oculto-->
+                    <input 
+                        type="hidden" 
+                        name="ID_Prestamo"
+                        [(ngModel)]="controladorPrestamosService.selectPrestamos.ID_Prestamo">
+                    <!--Agregamos los datos 1-->
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ID_Usuario_Prestamo"><b>Nombre del Usuario </b></label>
+                            <select 
+                                disabled="true"
+                                name="ID_Usuario_Prestamo"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%"
+                                [(ngModel)]="controladorPrestamosService.selectPrestamos.ID_Usuario_Prestamo">
+                                <!--Mostramos los ID de los Usuarios-->
+            
+                                <option 
+                                   *ngFor="let Usuarios of listUsuarios" 
+                                    [value]="Usuarios.Rut_Usuario">
+                                    {{Usuarios.Nombres_Usuario}} {{Usuarios.Apellido_Paterno_Usuario}}
+                                </option>
+                            </select>
+                        </div>
+                        <!--Agregamos los datos 2-->
+                        <div class="form-group col-md-6">
+                            <label for="ID_Libro_Prestamo"><b>Título del Libro</b></label>
+                            <select 
+                                disabled="true"
+                                name="ID_Libro_Prestamo"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%"
+                                [(ngModel)]="controladorPrestamosService.selectPrestamos.ID_Libro_Prestamo">
+                             
+                                <!--Mostramos los ID de los Categorías-->
+            
+                                <option 
+                                    *ngFor="let Libros of listLibros" 
+                                    [value]="Libros.Titulo_Libro">
+                                    {{Libros.Titulo_Libro}}
+                                </option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Fecha_Prestamo"><b>Fecha del Préstamo</b></label>
+                            <input 
+                            disabled="true"
+                            type="date"
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%" 
+                            name="Fecha_Prestamo" 
+                            [(ngModel)]="controladorPrestamosService.selectPrestamos.Fecha_Prestamo">
+                          </div>
+                      <div class="form-group col-md-6">
+                        <label for="Numero_Dias_Prestamo"><b>Número de Días</b></label>
+                        <select 
+                                name="Numero_Dias_Prestamo"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%"
+                                [(ngModel)]="controladorPrestamosService.selectPrestamos.Numero_Dias_Prestamo">
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>
+                                <option value="4"> 4 </option>
+                                <option value="5"> 5 </option>
+                            </select>
+                      </div>
+                </div>
+                    
+                  <!--Agregamos los botones-->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            <b> Editar</b>
+                        </button>
+                        <button type="button" (click)="resetForm(formEditarPrestamos)"  class="btn btn-outline-danger btn-sm" #btnClose data-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i><b> Cerrar</b>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

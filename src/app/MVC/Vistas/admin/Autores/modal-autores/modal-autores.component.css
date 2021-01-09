@@ -1,0 +1,40 @@
+/*Color mensaje validación*/
+.alert-danger{
+    color: white;
+    background:rgb(255, 0, 0);
+    border-color:orange;
+    margin-bottom: 3%;
+}
+
+/*Estilos cabecera modal*/
+.modal-header{
+    background:rgba(161, 157, 157, 0.342);
+    color: black;
+    
+}
+
+/*Estilos para el Título*/
+.modal-title {
+    text-align: center;
+}
+
+/*Estilos para el final dl modal*/
+.modal-footer{
+    background:rgba(161, 157, 157, 0.342);
+    color: white;
+}
+
+/*Estilos para el cuerpo del modal*/
+.modal-body{
+    background:rgba(161, 157, 157, 0.342);
+    color:black;
+}
+/**/
+.container-error-message {
+    padding: 3%;
+}
+
+/*Propiedad que desabilita el botón guardar*/
+.btn-outline-primary:hover:not([disabled]){
+    background:rgb(34, 34, 241);
+}

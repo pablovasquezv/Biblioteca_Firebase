@@ -1,0 +1,88 @@
+<div class="modal fade" id="ModalEditoriales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Nueva Editorial</h5>
+        <button type="button" 
+          class="close btn btn-danger" 
+          (click)="onReserForm(formularioIngresoEditoriales)"
+          data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+          llama al evento SaveEditoriales y pasara todos los campos del formulario (formEditoriales) -->
+        <form 
+         [formGroup]="formularioIngresoEditoriales" 
+         (ngSubmit)="onSaveEditoriales()">
+          <!--input para el id oculto-->
+          <input type="hidden" formControlName="ID_Editorial">
+          <!--Agregamos los datos 1-->
+          <div class="form-group">
+            <label for="Pais" class="col-form-label"><b>Nombre Editorial:</b></label>
+            <input type="text" class="form-control input-sm text-black my-3" style="width:100%;height:1%"
+              formControlName="Nombre_Editorial"
+               placeholder="Ingrese el Nombre de la Editorial">
+          </div>
+           <!--Inicio Div de Validación-->
+           <div class="alert-danger"
+           *ngIf="Nombre_Editorial.invalid && (Nombre_Editorial.dirty || Nombre_Editorial.touched) ">
+           <div class="container-error-message" *ngIf="Nombre_Editorial.errors.required" class="lead">El Nombre de la Editorial
+             es requerido!
+           </div>
+           <div class="container-error-message" *ngIf="Nombre_Editorial.errors.minlength" class="lead"> El Nombre de la Editorial debe tener como minimo 4
+             Carácteres </div>
+           <div class="container-error-message" *ngIf="Nombre_Editorial.errors.maxlength" class="lead"> El Nombre de la Editorial debe tener como máximo 60
+             Carácteres </div>
+         </div>
+         <!--Fin Div Validación-->
+          <!--Agregamos los datos2-->
+          <div class="form-group">
+            <label for="Pais" class="col-form-label"><b>Descripcion Editorial:</b></label>
+            <!--Creamos el txtArea nombre con un id y un nombre-->
+            <textarea 
+               class="form-control input-sm text-black my-3" 
+               style="width:100%;height:1%"
+               formControlName="Descripcion_Editorial"
+               placeholder="Ingrese la Descripcion de la Editorial"
+               rows="4" 
+               cols="40">
+            </textarea>
+          </div>
+          <!--Inicio Div de Validación-->
+          <div class="alert-danger"
+          *ngIf="Descripcion_Editorial.invalid && (Descripcion_Editorial.dirty || Descripcion_Editorial.touched) ">
+          <div class="container-error-message" *ngIf="Descripcion_Editorial.errors.required" class="lead">La Descripción de la Editorial
+            es requerida!
+          </div>
+          <div class="container-error-message" *ngIf="Descripcion_Editorial.errors.minlength" class="lead"> La Descripción de la Editorial debe tener como minimo 4
+            Carácteres </div>
+          <div class="container-error-message" *ngIf="Descripcion_Editorial.errors.maxlength" class="lead"> La Descripción de la Editorial debe tener como máximo 60
+            Carácteres </div>
+         </div>
+          <!--Fin Div Validación-->
+          <!--Inicio Div Botones-->
+          <div class="modal-footer">
+            <!--Desabilitamos el boton si el formulario con el método
+                      [disabled]="!formularioIngresoEditoriales.valid" no esta validadoformularioIngresoEditoriales-->
+            <button title="Botón Guardar" type="submit" [disabled]="!formularioIngresoEditoriales.valid"
+              class="btn btn-outline-primary btn-sm">
+              <i class="fa fa-save" aria-hidden="true"></i>
+              <b> Guardar</b>
+            </button>
+
+            <!--(click)="onReserForm(formularioIngresoEditoriales) limpaimos el formulario al cerrarlo-->
+            <button type="button" title="Botón Cerrar" (click)="onReserForm(formularioIngresoEditoriales)"
+              class="btn btn-outline-danger btn-sm" #btnClose data-dismiss="modal">
+              <i class="fa fa-times-circle" aria-hidden="true"></i><b> Cerrar</b>
+            </button>
+          </div>
+          <!--Fin Div Botones-->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

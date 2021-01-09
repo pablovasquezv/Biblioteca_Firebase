@@ -1,0 +1,175 @@
+<div class="modal fade" id="ModalLibros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Nuevo Libro</h5>
+                <!--(click)="onReserForm(formularioIngresoLibros) limpiamos el formulario al cerrarlo-->
+                <button 
+                    type="button" 
+                    (click)="onReserForm(formularioIngresoLibros)"  
+                    #btnClose
+                    class="close btn btn-danger" 
+                    data-dismiss="modal" 
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+          llama al evento SaveIngresoLibros y pasara todos los campos del formulario (formIngresoLibros) -->
+                <form 
+                    [formGroup]="formularioIngresoLibros" 
+                    (ngSubmit)="onSaveIngresoLibros()">
+                    <!--input para el id oculto-->
+                    <input 
+                    type="hidden" 
+                    formControlName="ID_Libro">
+                    <!--Agregamos los datos 1-->
+                    
+                    <div class=" form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Titulo_Libro"><b>Título del Libro</b></label>
+                        <input 
+                            type="text" 
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%"
+                            formControlName="Titulo_Libro" 
+                            placeholder="Ingrese el Título del Libros" autofocus>
+                    </div>
+                    <!--Inicio Div de Validación-->
+                    <div class="alert-danger" *ngIf="Titulo_Libro.invalid && (Titulo_Libro.dirty || Titulo_Libro.touched) ">
+                      <div class="container-error-message" *ngIf="Titulo_Libro.errors.required" class="lead">El Título del Libro es requerido!
+                      </div>
+                      <div class="container-error-message" *ngIf="Titulo_Libro.errors.minlength" class="lead"> El Título debe tener como minimo 4
+                        Carácteres </div>
+                      <div class="container-error-message" *ngIf="Titulo_Libro.errors.maxlength" class="lead"> El Título debe tener como máximo 60
+                        Carácteres </div>
+                    </div>
+                    <!--Fin Div Validación-->
+
+                    <div class="form-group col-md-6">
+                        <label for="Fecha_Edicion_Libro"><b>Fecha de Edición del Libro</b></label>
+                        <input 
+                            type="date" 
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%"
+                            formControlName="Fecha_Edicion_Libro">
+                    </div>
+            </div>
+            <!--Inicio Div de Validación-->
+            <div class="alert-danger" *ngIf="Fecha_Edicion_Libro.invalid && (Fecha_Edicion_Libro.dirty || Fecha_Edicion_Libro.touched) ">
+                <div class="container-error-message" *ngIf="Fecha_Edicion_Libro.errors.required" class="lead">La Fecha es requerida!
+                </div>
+            </div>
+            <!--Fin Div Validación-->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ID_Autor_Libro"><b>Nombre del Autor </b></label>
+                    <select 
+                        formControlName="ID_Autor_Libro" 
+                        class="form-control input-sm text-black"
+                        style="width:100%;height:50%">
+                        <!--Mostramos los ID de los Autores-->
+
+                        <option *ngFor="let Autores of listAutores" [value]="Autores.ID_Autor">
+                            {{Autores.Nombre_Autor}} {{Autores.Apellidos_Autor}}
+                        </option>
+                    </select>
+                </div>
+                <!--Inicio Div de Validación-->
+                <div class="alert-danger" *ngIf="ID_Autor_Libro.invalid && (ID_Autor_Libro.dirty || ID_Autor_Libro.touched) ">
+                    <div class="container-error-message" *ngIf="ID_Autor_Libro.errors.required" class="lead">El Autor es requerido!
+                    </div>
+                </div>
+                <!--Fin Div Validación-->
+                <div class="form-group col-md-6">
+                    <label for="ID_Categoria_Libro"><b>Categoría del Libro</b></label>
+                    <select 
+                        formControlName="ID_Categoria_Libro" 
+                        class="form-control input-sm text-black"
+                        style="width:100%;height:50%">
+                        <!--Mostramos los ID de los Categorías-->
+                        <option *ngFor="let Categorias of listCategorias" [value]="Categorias.ID_Categoria">
+                            {{Categorias.Nombre_Categoria}}
+                        </option>
+                    </select>
+                </div>
+                <!--Inicio Div de Validación-->
+                <div class="alert-danger" *ngIf="ID_Categoria_Libro.invalid && (ID_Categoria_Libro.dirty || ID_Categoria_Libro.touched) ">
+                    <div class="container-error-message" *ngIf="ID_Categoria_Libro.errors.required" class="lead">La Categoría es requerida!
+                    </div>
+                </div>
+                <!--Fin Div Validación-->
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ID_Editorial_Libro"><b>Editorial del Libro</b></label>
+                    <select 
+                        formControlName="ID_Editorial_Libro" 
+                        class="form-control input-sm text-black"
+                        style="width:100%;height:50%">
+                        <!--Mostramos los ID de los Editoriales-->
+                        <option *ngFor="let Editoriales of listEditoriales" [value]="Editoriales.ID_Editorial">
+                            {{Editoriales.Nombre_Editorial}}
+                        </option>
+                    </select>
+                </div>
+                <!--Inicio Div de Validación-->
+                <div class="alert-danger" *ngIf="ID_Editorial_Libro.invalid && (ID_Editorial_Libro.dirty || ID_Editorial_Libro.touched) ">
+                    <div class="container-error-message" *ngIf="ID_Editorial_Libro.errors.required" class="lead">La Editorial es requerida!
+                    </div>
+                </div>
+                <!--Fin Div Validación-->
+            </div>
+             <!--Agregamos los datos2-->
+             <div class="form-group">
+                <label for="Descripcion" class="col-form-label"><b>Descripción Libro</b></label>
+                <!--Creamos el txtArea nombre con un id y un nombre-->
+                <textarea 
+                    class="form-control input-sm text-black my-3" 
+                    style="width:100%;height:0%"
+                    formControlName="Descripcion_Libro" 
+                    placeholder="Ingrese la Descripcion del libro" 
+                    rows="3"
+                    cols="40">
+                </textarea>
+            </div>
+            <!--Inicio Div de Validación-->
+            <div class="alert-danger" *ngIf="Descripcion_Libro.invalid && (Descripcion_Libro.dirty || Descripcion_Libro.touched) ">
+                <div class="container-error-message" *ngIf="Descripcion_Libro.errors.required" class="lead">La Descripcion requerida!
+                </div>
+                <div class="container-error-message" *ngIf="Descripcion_Libro.errors.minlength" class="lead"> El Descripcion debe tener como minimo 4
+                  Carácteres </div>
+                <div class="container-error-message" *ngIf="Descripcion_Libro.errors.maxlength" class="lead"> El Descripcion debe tener como máximo 60
+                  Carácteres </div>
+              </div>
+              <!--Fin Div Validación-->
+            <!--Inicio Div Botones-->
+            <div class="modal-footer">
+                <!--Desabilitamos el boton si el formulario con el método
+                        [disabled]="!formularioIngresoLibros.valid" no esta validadoformularioIngresoLibros-->
+                <button title="Botón Guardar" 
+                    type="submit" 
+                    [disabled]="!formularioIngresoLibros.valid"
+                    class="btn btn-outline-primary btn-sm">
+                    <i class="fa fa-save" aria-hidden="true"></i>
+                    <b> Guardar</b>
+                </button>
+                <!--(click)="onReserForm(formularioIngresoLibros) limpaimos el formulario al cerrarlo-->
+                <button 
+                    type="button" 
+                    title="Botón Cerrar" 
+                    (click)="onReserForm(formularioIngresoLibros)"
+                    class="btn btn-outline-danger btn-sm" 
+                    #btnClose data-dismiss="modal">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i><b> Cerrar</b>
+                </button>
+            </div>
+            <!--Fin Div Botones-->
+            </form>
+        </div>
+    </div>
+</div>
+</div>

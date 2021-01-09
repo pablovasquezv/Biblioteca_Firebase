@@ -1,0 +1,221 @@
+<div class="modal fade" id="ModalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Nuevo Usuario</h5>
+                <button type="button" 
+                title="Botón Cerrar"
+                (click)="onReserForm(formIngresoUsuarios)" 
+                    class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--referencia para el formulario y cuando se envia proboca un evento 
+                Submit (ngSubmit),llama al evento SaveIngresoUsuarios y pasara todos 
+                los campos del formulario (formIngresoUsuarios) -->
+                <form 
+                    [formGroup]="formIngresoUsuarios" 
+                    (ngSubmit)="onSaveIngresoUsuarios()">
+                    <!--input para el id oculto-->
+                     <!-- <input 
+                        type="hidden" 
+                        name="ID_Usuario"
+                        [(ngModel)]="controladorUsuariosService.selectUsuarios.ID_Usuario">
+                   Agregamos los datos 1-->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label title="Rut Usuario" for="Rut_Usuario"><b>Rut Usuario</b></label>
+                          <input 
+                          type="text"
+                          formControlName="Rut_Usuario"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%"
+                          name="rut" 
+                          id="rut"
+                          oninput="checkRut(this)" 
+                          [autofocus]="true">
+                          
+                        </div>
+                        <!--Inicio Div de Validación-->
+                        <div class="alert-danger" *ngIf="Rut_Usuario.invalid && (Rut_Usuario.dirty || Rut_Usuario.touched) ">
+                          <div class="container-error-message"*ngIf="Rut_Usuario.errors.required" class="lead">El Rut Usuario es requerido!</div>
+                          <div class="container-error-message" *ngIf="Rut_Usuario.errors.minlength" class="lead"> El Rut  debe tener como minimo 12 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Rut_Usuario.errors.maxlength" class="lead"> El Rut debe tener como máximo 12 Carácteres </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                        <!--Agregamos los datos2-->
+                        <div class="form-group col-md-6">
+                          <label for="Nombres_Usuario"><b>Nombres</b></label>
+                          <input 
+                          type="text"
+                          formControlName="Nombres_Usuario"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                           >
+                        </div>
+                        <!--Inicio Div de Validación-->
+                        <div class="alert-danger" *ngIf="Nombres_Usuario.invalid && (Nombres_Usuario.dirty || Nombres_Usuario.touched) ">
+                          <div class="container-error-message"*ngIf="Nombres_Usuario.errors.required" class="lead">Los Nombres son requeridos!</div>
+                          <div class="container-error-message" *ngIf="Nombres_Usuario.errors.minlength" class="lead"> Los Nombres  debe tener como minimo 5 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Nombres_Usuario.errors.maxlength" class="lead"> Los Nombres debe tener como máximo 30 Carácteres </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                      </div>
+                      <!--Agregamos los datos 3-->
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Apellido_Paterno"><b>Apellido Paterno</b></label>
+                            <input 
+                            type="text"
+                            formControlName="Apellido_Paterno_Usuario"
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%">
+                        </div>
+                        <!--Inicio Div de Validación-->
+                        <div class="alert-danger" *ngIf="Apellido_Paterno_Usuario.invalid && (Apellido_Paterno_Usuario.dirty || Apellido_Paterno_Usuario.touched) ">
+                          <div class="container-error-message"*ngIf="Apellido_Paterno_Usuario.errors.required" class="lead">El Apelllido Paterno es requeridos!</div>
+                          <div class="container-error-message" *ngIf="Apellido_Paterno_Usuario.errors.minlength" class="lead"> El Apelllido Paterno debe tener como minimo 5 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Apellido_Paterno_Usuario.errors.maxlength" class="lead"> El Apelllido Paterno debe tener como máximo 20 Carácteres </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                        <!--Agregamos los datos 4-->
+                        <div class="form-group col-md-6">
+                          <label for="Apellido_Materno"><b>Apellido Materno</b></label>
+                          <input 
+                          type="text"
+                          formControlName="Apellido_Materno_Usuario" 
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%">
+                        </div>
+                        <!--Inicio Div de Validación-->
+                        <div class="alert-danger" *ngIf="Apellido_Materno_Usuario.invalid && (Apellido_Materno_Usuario.dirty || Apellido_Materno_Usuario.touched) ">
+                          <div class="container-error-message"*ngIf="Apellido_Materno_Usuario.errors.required" class="lead">El Apelllido Materno es requeridos!</div>
+                          <div class="container-error-message" *ngIf="Apellido_Materno_Usuario.errors.minlength" class="lead"> El Apelllido Materno debe tener como minimo 5 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Apellido_Materno_Usuario.errors.maxlength" class="lead"> El Apelllido Materno debe tener como máximo 20 Carácteres </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                      </div>
+                      <!--Agregamos los datos 5-->
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="Fecha Nacimiento"><b>Fecha Nacimiento</b></label>
+                          <input 
+                          type="date"
+                          formControlName="Fecha_Nacimiento_Usuario" 
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%">
+                        </div>
+                        <!--Inicio Div de Validación-->
+                        <div class="alert-danger" *ngIf="Fecha_Nacimiento_Usuario.invalid && (Fecha_Nacimiento_Usuario.dirty || Fecha_Nacimiento_Usuario.touched) ">
+                          <div class="container-error-message"*ngIf="Fecha_Nacimiento_Usuario.errors.required" class="lead">La Fecha de Nacimiento es requerida!</div>
+                          <div class="container-error-message" *ngIf="Fecha_Nacimiento_Usuario.errors.minlength" class="lead"> La Fecha de Nacimiento debe tener como minimo 5 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Fecha_Nacimiento_Usuario.errors.maxlength" class="lead"> La Fecha de Nacimiento debe tener como máximo 20 Carácteres </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                        <!--Agregamos los datos 6-->
+                        <div class="form-group col-md-6">
+                            <label for="genero"><b>Género</b></label>
+                            <select  
+                            formControlName="Sexo_Usuario" 
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%">
+                              <option value="1"><b>Masculino</b></option>
+                              <option value="0"><b>Femenino</b></option>
+                            </select>
+                          </div>
+                          <!--Inicio Div de Validación-->
+                          <div class="alert-danger" *ngIf="Sexo_Usuario.invalid && (Sexo_Usuario.dirty || Sexo_Usuario.touched) ">
+                            <div class="container-error-message"*ngIf="Sexo_Usuario.errors.required" class="lead">El Sexo es requerido!</div>
+                            <div class="container-error-message" *ngIf="Sexo_Usuario.errors.minlength" class="lead"> El Sexo debe tener como minimo 5 Carácteres </div>
+                            <div class="container-error-message" *ngIf="Sexo_Usuario.errors.maxlength" class="lead"> El Sexo debe tener como máximo 20 Carácteres </div>
+                          </div>
+                          <!--Fin Div Validación-->
+                    </div>
+                    <!--Agregamos los datos 7-->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email"><b>Email</b></label>
+                            <input 
+                            type="email"
+                            formControlName="Email_Usuario"
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%" 
+                            placeholder="@">
+                        </div>
+                        <!--Inicio Div de Validación-->
+                        <div class="alert-danger" 
+                        *ngIf="Email_Usuario.invalid && (Email_Usuario.dirty || Email_Usuario.touched)">
+                          <div class="container-error-message"*ngIf="Email_Usuario.errors.required" class="lead">El Email es requerido!</div>
+                          <div class="container-error-message" *ngIf="Email_Usuario.errors.minlength" class="lead"> El Email debe tener como minimo 5 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Email_Usuario.errors.maxlength" class="lead"> El Email debe tener como máximo 20 Carácteres </div>
+                          <div class="container-error-message" 
+                          *ngIf="(Email_Usuario.dirty || Email_Usuario.touched) && Email_Usuario.errors.pattern" class="lead"> Ingrese un email Valido </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                        <!--Agregamos los datos 8-->
+                        <div class="form-group col-md-6">
+                          <label for="telefono"><b>Teléfono</b></label>
+                          <input 
+                          type="text"
+                          formControlName="Telefono_Usuario" 
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%">
+                        </div>
+                        <!--Inicio Div de Validación-->
+                        <div class="alert-danger" *ngIf="Telefono_Usuario.invalid && (Telefono_Usuario.dirty || Telefono_Usuario.touched) ">
+                          <div class="container-error-message"*ngIf="Telefono_Usuario.errors.required" class="lead">El Teléfono es requerido!</div>
+                          <div class="container-error-message" *ngIf="Telefono_Usuario.errors.minlength" class="lead"> El Teléfono debe tener como minimo 5 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Telefono_Usuario.errors.maxlength" class="lead"> El Teléfono debe tener como máximo 12 Carácteres </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                    </div>
+                      <!--Agregamos los datos 9-->
+                    <div class="form-group">
+                        <label for="Direccion" class="col-form-label"><b>Dirección:</b></label>
+                        <!--Creamos el txtArea nombre con un id y un nombre-->
+                        <textarea 
+                            formControlName="Direccion_Usuario"
+                            class="form-control input-sm text-black my-3" 
+                            style="width:100%;height:0%"
+                            rows="1" 
+                            cols="40">
+                         </textarea>
+                         <!--Inicio Div de Validación-->
+                        <div class="alert-danger" *ngIf="Direccion_Usuario.invalid && (Direccion_Usuario.dirty || Direccion_Usuario.touched) ">
+                          <div class="container-error-message"*ngIf="Direccion_Usuario.errors.required" class="lead">La Dirección es requerida!</div>
+                          <div class="container-error-message" *ngIf="Direccion_Usuario.errors.minlength" class="lead"> La Dirección debe tener como minimo 5 Carácteres </div>
+                          <div class="container-error-message" *ngIf="Direccion_Usuario.errors.maxlength" class="lead"> La Dirección debe tener como máximo 120 Carácteres </div>
+                        </div>
+                        <!--Fin Div Validación-->
+                    </div>
+                    <!--Agregamos los Botones-->
+                    <div class="modal-footer">
+                       <!--Desabilitamos el boton si el formulario con el método
+                           [disabled]="!formIngresoUsuarios.valid" [disabled]="!formIngresoUsuarios.valid"
+                           no esta validadoformIngresoUsuarios-->
+                        <button 
+                              title="Botón Guardar"
+                              type="submit" 
+                              
+                              class="btn btn-outline-primary btn-sm">
+                              <i class="fa fa-save" aria-hidden="true"></i> 
+                            <b> Guardar</b>
+                        </button>
+                        <button 
+                              type="button"
+                              title="Botón Cerrar"
+                              (click)="onReserForm(formIngresoUsuarios)" 
+                              class="btn btn-outline-danger btn-sm" 
+                              #btnClose data-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i><b> Cerrar</b>
+                        </button>
+                    </div>
+                    <!--Fin de los Botones-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+<div class="modal fade" id="Modal_Editar_Usuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Edición de Usuarios</h5>
+                <button type="button" (click)="resetForm(formEditarUsuarios)" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+          llama al evento SaveEditarUsuarios y pasara todos los campos del formulario (formEditarUsuarios) -->
+                <form 
+                        name="formEditarUsuarios" 
+                        #formEditarUsuarios="ngForm" 
+                        (ngSubmit)="onSaveEditarUsuarios(formEditarUsuarios)">
+                    <!--input para el id oculto-->
+                    <input 
+                        type="hidden" 
+                        name="ID_Usuario"
+                        [(ngModel)]="controladorUsuariosService.selectUsuarios.ID_Usuario">
+                    <!--Agregamos los datos 1-->
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="precio"><b>Rut</b></label>
+                          <input 
+                          type="text"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                          disabled="true"
+                          name="Rut_Usuario" 
+                          [(ngModel)]="controladorUsuariosService.selectUsuarios.Rut_Usuario">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="precio"><b>Nombre</b></label>
+                          <input 
+                          type="text"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                          name="Nombres_Usuario" 
+                          [(ngModel)]="controladorUsuariosService.selectUsuarios.Nombres_Usuario"
+                          autofocus>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="precio"><b>Apellido Paterno</b></label>
+                            <input 
+                            type="text"
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%" 
+                            name="Apellido_Paterno_Usuario" 
+                            placeholder="0,00$"
+                            [(ngModel)]="controladorUsuariosService.selectUsuarios.Apellido_Paterno_Usuario">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="precio"><b>Apellido Materno</b></label>
+                          <input 
+                          type="text"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                          name="Apellido_Materno_Usuario" 
+                          [(ngModel)]="controladorUsuariosService.selectUsuarios.Apellido_Materno_Usuario">
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="precio"><b>Fecha Nacimiento</b></label>
+                          <input 
+                          type="date"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                          name="Fecha_Nacimiento_Usuario"
+                          [(ngModel)]="controladorUsuariosService.selectUsuarios.Fecha_Nacimiento_Usuario">
+                        </div>
+                        <!--
+                             <select name="Sexo_UsuarioSexo_Usuario" 
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%"
+                            [(ngModel)]="controladorUsuariosService.selectUsuarios.Sexo_Usuario" >
+                              <option value="1"><b>Masculino</b></option>
+                              <option value="0"><b>Femenino</b></option>
+                            </select>
+                        -->
+                        <div class="form-group col-md-6">
+                            <label for="genero"><b>Género</b></label>
+                            <select
+                            name="Sexo_Usuario" 
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%"
+                            [(ngModel)]="controladorUsuariosService.selectUsuarios.Sexo_Usuario"  >
+                              <option value="1"><b>Masculino</b></option>
+                              <option value="0"><b>Femenino</b></option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="precio"><b>Email</b></label>
+                            <input 
+                            type="email"
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%" 
+                            name="Email_Usuario" 
+                            [(ngModel)]="controladorUsuariosService.selectUsuarios.Email_Usuario">
+                        </div>
+                    <div class="form-group col-md-6">
+                          <label for="precio"><b>Teléfono</b></label>
+                          <input 
+                          type="text"
+                          class="form-control input-sm text-black" 
+                          style="width:100%;height:50%" 
+                          name="Telefono_Usuario" 
+                          [(ngModel)]="controladorUsuariosService.selectUsuarios.Telefono_Usuario">
+                        </div>
+                    </div>
+                      <!--Agregamos los datos2-->
+                    <div class="form-group">
+                        <label for="Pais" class="col-form-label"><b>Dirección:</b></label>
+                        <!--Creamos el txtArea nombre con un id y un nombre-->
+                        <textarea 
+                            class="form-control input-sm text-black my-3" 
+                            style="width:100%;height:0%"
+                            name="Direccion_Usuario"
+                            [(ngModel)]="controladorUsuariosService.selectUsuarios.Direccion_Usuario"
+                            placeholder="Ingrese la Descripcion de la Categoría" 
+                            rows="1" 
+                            cols="40">
+                         </textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit"
+                            class="btn btn-outline-primary btn-sm">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            <b> Editar</b>
+                        </button>
+                        <button 
+                            type="button" 
+                            (click)="resetForm(formEditarUsuarios)" 
+                            class="btn btn-outline-danger btn-sm" 
+                            #btnClose data-dismiss="modal">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i><b> Cerrar</b>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

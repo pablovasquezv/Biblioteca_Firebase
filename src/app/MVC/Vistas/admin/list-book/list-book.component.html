@@ -1,0 +1,97 @@
+<section class="row mt-5">
+    <div class="row">
+        <div class="col">
+            <h6 class="text-center"><b>Lista de Libros</b></h6>
+            <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+            <div class="table-responsive">
+                <button class="btn btn-primary float-right mb-3"
+                         data-toggle="modal" 
+                          data-target="#ModalBook"><b>Nuevo Libro</b></button>
+                          ADMIN:{{isAdmin}}
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"><b>#</b></th>
+                            <th scope="col"><b>Título</b></th>
+                            <th scope="col"><b>Autor</b></th>
+                            <th scope="col"><b>Idioma</b></th>
+                            <th scope="col"><b>Precio</b></th>
+                            <th scope="col"><b>Oferta</b></th>
+                            <th scope="col"><b>Botón</b></th>
+                            <th scope="col"><b>Botón</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pActual }  | filter: filterPost -->
+
+                        <tr *ngFor="let Books of books | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{Books.Titulo}}</td>
+                            <td>{{Books.Autor}}</td>
+                            <td>{{Books.Idioma}}</td>
+                            <td>{{Books.Precio}}</td>
+                            <td>{{Books.Oferta == 1?'Si' : 'No'}}</td>
+                            <!--Verificación con *ngIf="" del usuario si es Admin se 
+                            muestra el boton de lo contraro se desabilita-->
+                            <td *ngIf="books.userUid == userUid || isAdmin == true; else noOwner">
+                                <!--al hacer un clic se ejecuta el método 
+                                            (click)="onEdit(cliente) para editar
+                                             todos los campos routerLink="/cliente-list"-->
+                                <button 
+                                    class="btn btn-warning text-white"
+                                    data-toggle="modal" 
+                                    data-target="#ModalBook"
+                                    (click)="onEdit(Books)">
+                                    <i class="far fa-edit"></i>
+                                    <b>Editar</b>
+                                </button>
+                            </td>
+                             <!--Template para desabilitar el botón al no ser admin-->
+                             <ng-template #noOwner>
+                                 <td>
+                                    <button 
+                                    class="btn btn-warning text-white"
+                                    disabled="true">
+                                    <i class="far fa-edit"></i>
+                                        <b>Editar</b>
+                                    </button>
+                                </td>
+                            </ng-template>
+                            <!--Verificación con *ngIf="" del usuario si es Admin se 
+                            muestra el boton de lo contraro se desabilita-->
+                            <td *ngIf="isAdmin == true; else noAdmin">
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                                <button 
+                                    class="btn btn-danger text-white"
+                                    (click)="onDelete(Books.id)">
+                                    <i class="fa fa-trash-alt"></i>
+                                    <b>Eliminar</b>
+                                </button>
+                            </td>
+                            <!--Template para desabilitar el botón al no ser admin-->
+                            <ng-template #noAdmin>
+                                <td>
+                                    <button 
+                                        class="btn btn-danger text-white"
+                                        disabled="true">
+                                        <i class="fa fa-trash-alt"></i>
+                                        <b>Eliminar</b>
+                                    </button>
+                                </td>
+                            </ng-template>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Agregamos la paginacion a la  tabla-->
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Agregamos la propiedad [userUid]="userUid"
+     del id del usuario que inicio sesion-->
+<app-modal [userUid]="userUid"></app-modal>

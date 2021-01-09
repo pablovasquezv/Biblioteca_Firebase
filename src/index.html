@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Biblioteca Commplejo Educacional Luis Durand</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+</head>
+
+<body onload="deshabilitaRetroceso()">
+  <app-root></app-root>
+
+  <script type="text/javascript">
+    function deshabilitaRetroceso() {
+      window.location.hash = "no-back-button";
+      window.location.hash = "Again-No-back-button"; //chrome
+      window.onhashchange = function () { window.location.hash = "no-back-button"; }
+      window.onbeforeunload = function () {
+        return "¿Estás seguro que deseas salir de la actual página?"
+      }
+    }
+  </script>
+
+</body>
+
+</html>

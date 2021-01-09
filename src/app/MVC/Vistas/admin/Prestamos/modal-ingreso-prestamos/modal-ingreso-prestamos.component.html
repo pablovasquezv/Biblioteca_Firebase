@@ -1,0 +1,132 @@
+<div class="modal fade" id="ModalPrestamos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Nuevo Préstamo</h5>
+                <button type="button" 
+                        title="Botón Cerrar"
+                        (click)="resetForm(formularioIngresoPrestamos)"    
+                        class="close btn btn-danger" 
+                        data-dismiss="modal" 
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--referencia para el formulario y cuando se envia proboca un evento Submit (ngSubmit),
+          llama al evento SaveIngresoPrestamos y pasara todos los campos del formulario (formularioIngresoPrestamos) -->
+                <form 
+                    [formGroup]="formularioIngresoPrestamos" 
+                    (ngSubmit)="onSaveIngresoPrestamos()">
+                     <!--input para el id oculto-->
+                     <input 
+                            type="hidden" 
+                            formControlName="ID_Prestamo">
+                      <!--Input para que solo editar el usuario que crea un libro-->
+                      <input 
+                            type="hidden" 
+                            formControlName="userUid" 
+                            [value]="userUid">  
+                   <!--Filtro Buscador-->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ru"><b>Búsqueda Rut Usuarios</b></label>
+                            <input type="text" 
+                               formControlName="filtroUsuarios" 
+                               class="form-control" 
+                               placeholder="Ingrese el Rut Usuario." >
+                        </div>
+                         <!--Fin Filtro Buscador-->
+                         <!--Incio Filtro Buscador-->
+                        <div class="form-groupcol-md-6">
+                            <label for="titulo_Libro"><b>Búsqueda de Libros</b></label>
+                            <input 
+                            type="text"
+                            formControlName="filtroLibros" 
+                            class="form-control" placeholder="Ingrese el Título del libro..."
+                            
+                            >
+                        </div>
+                        <!-- Fin Filtro Buscador-->
+                    </div>
+                    <!--Filtro Buscador-->
+                      <!--Agregamos los datos 1-->
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ID_Usuario_Prestamo"><b>Nombre del Usuario </b></label>
+                            
+                            <select 
+                                formControlName="ID_Usuario_Prestamo"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%">
+                                <!--Mostramos los ID de los Usuarios-->
+                                <option class="form-control input-sm  my-3 text-black" value="">
+                                 El Usuario no existe!!</option>
+                                <option *ngFor="let Usuarios of listUsuarios | filterUsuarios:filtroUsuarios" [value]="Usuarios.Rut_Usuario">
+                                    {{Usuarios.Nombres_Usuario}} {{Usuarios.Apellido_Paterno_Usuario}}
+                                </option>
+                            </select>
+                        </div>
+                        <!--Agregamos los datos 2-->
+                        <div class="form-group col-md-6">
+                            <label for="ID_Libro_Prestamo"><b>Título del Libro</b></label>
+                            <select 
+                                formControlName="ID_Libro_Prestamo"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%">
+                                <!--Mostramos los ID de los Categorías-->
+                                <option *ngFor="let Libros of listLibros | filterLibros:filtroLibros" [value]="Libros.Titulo_Libro">
+                                    {{Libros.Titulo_Libro}}
+                                </option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Fecha_Prestamo"><b>Fecha del Préstamo</b></label>
+                            <input 
+                            type="date"
+                            class="form-control input-sm text-black" 
+                            style="width:100%;height:50%" 
+                            formControlName="Fecha_Prestamo" >
+                          </div>
+                      <div class="form-group col-md-6">
+                        <label for="Numero_Dias_Prestamo"><b>Número de Días</b></label>
+                        <select 
+                                formControlName="Numero_Dias_Prestamo"
+                                class="form-control input-sm text-black" 
+                                style="width:100%;height:50%">
+                                <option value="1"> 1 </option>
+                                <option value="2"> 2 </option>
+                                <option value="3"> 3 </option>
+                                <option value="4"> 4 </option>
+                                <option value="5"> 5 </option>
+                            </select>
+                      </div>
+                </div>
+                    
+                  <!--Agregamos los botones-->
+                    <div class="modal-footer">
+                        <button type="submit" 
+                                class="btn btn-outline-primary btn-sm"
+                                title="Botón Guardar">
+                                <i class="fa fa-save" aria-hidden="true"></i> 
+                                <b> Guardar</b>
+                        </button>
+                        <button type="button" 
+                                title="Botón Cerrar"
+                                class="btn btn-outline-danger btn-sm" 
+                                (click)="resetForm(formularioIngresoPrestamos)"    
+                                #btnClose data-dismiss="modal">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                <b> Cerrar</b>
+                        </button>
+                    </div>
+                    <!--Fin de los botones-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

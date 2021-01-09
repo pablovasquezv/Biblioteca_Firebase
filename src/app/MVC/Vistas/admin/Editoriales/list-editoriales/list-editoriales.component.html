@@ -1,0 +1,58 @@
+<section class="row mt-5" >
+    
+        <div class="col-sm-12 center-block ">
+            <h6 class="text-center"><b>Lista de Editoriales</b></h6>
+            <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+            <div class="table-responsive">
+                <button 
+                    class="btn btn-primary float-right mb-3" 
+                    data-toggle="modal" 
+                    data-target="#ModalEditoriales">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> 
+                    <b> Nueva Editorial</b>
+                </button>
+                <!--Filtro Buscador-->
+                <div class="form-group">
+                    <input type="text"
+                    name="filtroEditoriales" 
+                    class="form-control" placeholder="Búsqueda del Nombre de la Editorial..."
+                    [(ngModel)]="filtroEditoriales"
+                    >
+                </div>
+                <!-- Fin Filtro Buscador-->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"><b>#</b></th>
+                            <th scope="col"><b>Nombre</b></th>
+                            <th scope="col"><b>Descripción</b></th>
+                            <th scope="col"><b>Botón</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pActual }  | filter: filterPost -->
+
+                        <tr *ngFor="let Editoriales of listEditoriales | filterEditoriales:filtroEditoriales | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{Editoriales.Nombre_Editorial}}</td>
+                            <td>{{Editoriales.Descripcion_Editorial}}</td>
+                            <td>
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                                <button class="btn btn-danger text-white" (click)="onDelete(Editoriales.ID_Editorial)">
+                                    <i class="fa fa-trash-alt"></i>
+                                    <b>Eliminar</b></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Agregamos la paginacion a la  tabla-->
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+            </div>
+        </div>
+</section>
+<app-modal-editoriales></app-modal-editoriales>
+

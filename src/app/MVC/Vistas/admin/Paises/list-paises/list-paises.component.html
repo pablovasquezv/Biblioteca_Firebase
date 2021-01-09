@@ -1,0 +1,56 @@
+<section class="row mt-5" >
+        <div  class="col-sm-12">
+            <h6 class="text-center"><b>Lista de Paises</b></h6>
+            <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+            <div class="table-responsive ">
+                <button 
+                    class="btn btn-primary float-right mb-3" 
+                    data-toggle="modal" data-target="#ModalPaises">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> 
+                    <b> Nuevo País</b>
+                </button>
+                <!--Filtro Buscador-->
+                <div class="form-group">
+                    <input 
+                    type="text"
+                    name="filtroPaises" 
+                    class="form-control" placeholder="Búsqueda  Paises..."
+                    [(ngModel)]="filtroPaises"
+                    >
+                </div>
+                <!-- Fin Filtro Buscador-->
+               <!-- <table class="table table-hover">-->
+                <table  class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center"><b>#</b></th>
+                            <th scope="col" class="text-center"><b>Nombre País</b></th>
+                            <th scope="col"class="text-center"><b>Botón</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pActual }  | filter: filterPost -->
+
+                        <tr *ngFor="let Paises of listPaises | filterPaises:filtroPaises | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i">
+                          
+                            <th scope="row" class="text-center">{{i+1}}</th>
+                            <td class="text-center">{{Paises.Nombre_Pais}}</td>
+                            <td class="text-center">
+                                <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                                <button class="btn btn-danger text-white" (click)="onDelete(Paises.ID_Pais)">
+                                    <i class="fa fa-trash-alt"></i>
+                                    <b>Eliminar</b></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Agregamos la paginacion a la  tabla-->
+                <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+            </div>
+        </div>
+</section>
+<app-modal-paises></app-modal-paises>

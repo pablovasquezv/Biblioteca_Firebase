@@ -1,0 +1,108 @@
+<section class="row mt-5">
+
+    <div aling="center" class="col-md mt-5">
+        <h6 class="text-center"><b>Lista de Prestamos</b></h6>
+        <!--Creamos una tabla Reponsible <th scope="col"><b>Codigo</b></th>-->
+        <div class="table-responsive">
+            <button class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#ModalPrestamos">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                <b> Nuevo Préstamo</b>
+            </button>
+            <!--Filtro Buscador-->
+            <div class="form-group">
+                <input type="text" 
+                    name="filtroPrestamos" 
+                    class="form-control"
+                    placeholder="Búsqueda  Rut de Prestamos..." 
+                    [(ngModel)]="filtroPrestamos">
+            </div>
+            <!-- Fin Filtro Buscador-->
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center"><b>#</b></th>
+                        <th scope="col" class="text-center"><b>Rut Usuario</b></th>
+                        <th scope="col" class="text-center"><b>Título Libro</b></th>
+                        <th scope="col" class="text-center"><b>Fecha Préstamo</b></th>
+                        <th scope="col" class="text-center"><b>Número de Días</b></th>
+                        <th scope="col" class="text-center"><b>Botón</b></th>
+                        <th scope="col" class="text-center"><b>Botón</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--Recorremos los elementos de la base y los guardamos en  <td>{{cliente.key_cliente}}</td>
+                    una la lista, con la variable product que traer un solo 
+                    producto para mostrarlo dentro de una fila  | filter: filterPost 
+                    | paginate: {itemsPerPage: 3, currentPage:pageActual }  | filter: filterPost -->
+
+                    <tr
+                        *ngFor="let Prestamos of listPrestamos | filterPrestamos:filtroPrestamos | paginate: {itemsPerPage: 3, currentPage:pageActual}; index as i">
+                        <th scope="row">{{i+1}}</th>
+                        <td class="text-center">{{Prestamos.ID_Usuario_Prestamo}}</td>
+                        <td class="text-center">{{Prestamos.ID_Libro_Prestamo}}</td>
+                        <td class="text-center">{{Prestamos.Fecha_Prestamo}}</td>
+                        <td class="text-center">{{Prestamos.Numero_Dias_Prestamo}}</td>
+                        <!--Verificación con *ngIf="" del usuario si es Admin se 
+                            muestra el boton de lo contraro se desabilita-->
+                        <td class="text-center" *ngIf="Prestamos.userUid == userUid || isAdmin == true; else noOwner">
+                            <!--al hacer un clic se ejecuta el método 
+                                        (click)="onEdit(cliente) para editar
+                                         todos los campos routerLink="/cliente-list"-->
+                            <button class="btn btn-warning text-white"
+                                title="Botón Editar" 
+                                data-toggle="modal"
+                                data-target="#Modal_Editar_Prestamos" (click)="onEdit(Prestamos)">
+                                <!--
+                                <i class="fa fa-edit"></i>
+                                -->
+                                <b>Editar</b>
+                            </button>
+                        </td>
+                        <!--Template para desabilitar el botón al no ser admin-->
+                        <ng-template #noOwner>
+                            <td >
+                                <button 
+                                class="btn btn-warning text-white" 
+                                title="Botón Cerrar"
+                                disabled="true">
+                                    <!--
+                                    <i class="far fa-edit"></i>
+                                    -->
+                                    <b>Editar</b>
+                                </button>
+                            </td>
+                        </ng-template>
+                        <!--Verificación con *ngIf="isAdmin == true; else noAdmin" del usuario si es Admin se 
+                            muestra el boton de lo contraro se desabilita-->
+                        <td class="text-center" *ngIf="isAdmin == true; else noAdmin">
+                            <!--al hacer un clic se ejecuta el método 
+                                        (click)="onDelerte(cliente) para Eliminar con al id-->
+                            <button class="btn btn-danger text-white"
+                                    title="Botón Eliminar"
+                                    (click)="onDelete(Prestamos.ID_Prestamo)">
+                                <i class="fas fa-trash-alt"></i>
+                                <b>Eliminar</b>
+                            </button>
+                        </td>
+                        <!--Template para desabilitar el botón al no ser admin-->
+                        <ng-template #noAdmin>
+                            <td>
+                                <button class="btn btn-danger text-white" disabled="true">
+                                    <i class="fa fa-trash-alt"></i>
+                                    <b>Eliminar</b>
+                                </button>
+                            </td>
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </table>
+            <!--Agregamos la paginacion a la  tabla-->
+            <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+        </div>
+    </div>
+</section>
+<!--Agregamos la propiedad [userUid]="userUid"
+     del id del usuario que inicio sesion-->
+<app-modal-ingreso-prestamos [userUid]="userUid"></app-modal-ingreso-prestamos>
+<app-modal-editar-prestamos></app-modal-editar-prestamos>
